@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MILES — Running Community</title>
+  <meta name="description" content="MILESは、速さより「踏み出すこと」を大切にするランニングコミュニティです。"/>
+  <meta property="og:title" content="MILES — Running Community"/>
+  <meta property="og:description" content="最初の一歩を、みんなで。物語の始まりを祝う朝。"/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.x/dist/tabler-icons.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sand: #f5f0e8; --sand2: #ede6d6; --earth: #8c6f4e; --earth2: #6b5136;
+      --green: #4a6741; --white: #fffdf8; --muted: #7a6a54; --text: #2c2416;
+      --tag-bg: #e8dfc8; --tag-text: #6b5136; --dark: #1a1410; --gold: #b8955a;
+      --border: #e0d8c8; --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background: var(--sand); color: var(--text); min-height: 100vh; }
+    .lp { max-width: 680px; margin: 0 auto; background: var(--white); box-shadow: 0 0 40px rgba(0,0,0,0.08); }
+
+    /* Hero */
+    .hero { background: var(--dark); padding: 64px 40px 56px; text-align: center; border-bottom: 1px solid #2a2016; }
+    .hero-logo { width: 96px; height: 96px; object-fit: contain; margin: 0 auto 24px; display: block; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 5px; color: #7a6a50; margin-bottom: 20px; font-weight: 500; }
+    .hero-en { font-size: 18px; font-style: italic; color: var(--gold); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .hero-ja { font-size: 22px; font-weight: 500; color: #f0e8d8; line-height: 1.4; margin-bottom: 22px; }
+    .hero-desc { font-size: 13px; color: #7a6a50; line-height: 2; max-width: 360px; margin: 0 auto; }
+
+    /* Sections */
+    .section { padding: 44px 40px; border-bottom: 1px solid var(--border); }
+    .s-sand { background: var(--sand); }
+    .s-white { background: var(--white); }
+    .label { font-size: 11px; letter-spacing: 3px; font-weight: 500; color: var(--earth); margin-bottom: 14px; }
+    .s-title { font-size: 22px; font-weight: 500; color: var(--earth2); margin-bottom: 14px; line-height: 1.4; }
+    .body-text { font-size: 15px; color: var(--muted); line-height: 1.85; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .tag { background: var(--tag-bg); color: var(--tag-text); font-size: 12px; padding: 5px 14px; border-radius: 100px; font-weight: 500; }
+
+    /* Cards */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px; }
+    .card-icon { font-size: 20px; color: var(--earth); margin-bottom: 8px; }
+    .card-title { font-size: 14px; font-weight: 500; color: var(--earth2); margin-bottom: 5px; }
+    .card-body { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* Events */
+    .event-list { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .event-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start; }
+    .event-date-block { text-align: center; min-width: 44px; }
+    .event-month { font-size: 10px; font-weight: 500; color: var(--earth); letter-spacing: 1px; }
+    .event-day { font-size: 28px; font-weight: 500; color: var(--earth2); line-height: 1; }
+    .event-dow { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .event-divider { width: 1px; background: var(--border); align-self: stretch; margin: 0 4px; }
+    .event-info { flex: 1; }
+    .event-title { font-size: 14px; font-weight: 500; color: var(--earth2); margin-bottom: 4px; }
+    .event-meta { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .event-loc { font-size: 12px; color: var(--green); margin-top: 3px; }
+    .event-badge { display: inline-block; background: var(--tag-bg); color: var(--tag-text); font-size: 11px; padding: 2px 10px; border-radius: 100px; margin-top: 6px; }
+    .event-empty { font-size: 13px; color: var(--muted); padding: 28px 0; text-align: center; }
+
+    /* Admin */
+    .admin-toggle { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+    .admin-toggle button { font-size: 11px; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 5px 12px; cursor: pointer; }
+    .admin-toggle button:hover { background: var(--sand2); }
+    .admin-panel { background: #fafaf6; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; margin-top: 10px; display: none; }
+    .admin-panel.open { display: block; }
+    .admin-title { font-size: 11px; font-weight: 500; color: var(--earth2); letter-spacing: 2px; margin-bottom: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .form-row.full { grid-template-columns: 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+    .form-group input, .form-group select, .form-group textarea { font-size: 13px; color: var(--text); background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; font-family: inherit; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--earth); }
+    .form-group textarea { resize: vertical; min-height: 64px; }
+    .btn-add { width: 100%; margin-top: 8px; background: var(--earth2); color: #f5ede0; font-size: 13px; font-weight: 500; border: none; border-radius: var(--radius-md); padding: 11px; cursor: pointer; font-family: inherit; }
+    .btn-add:hover { background: var(--earth); }
+    .admin-list { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+    .admin-list-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 10px; }
+    .admin-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--earth2); }
+    .admin-item:last-child { border-bottom: none; }
+    .btn-del { font-size: 11px; color: #a05050; background: none; border: 1px solid #d0a0a0; border-radius: var(--radius-sm); padding: 3px 10px; cursor: pointer; font-family: inherit; }
+
+    /* Accordion */
+    details { border-top: 1px solid var(--border); margin-top: 6px; }
+    summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 14px 0; font-size: 13px; color: var(--muted); user-select: none; }
+    summary::-webkit-details-marker { display: none; }
+    .chev { font-size: 13px; color: var(--muted); transition: transform 0.2s; }
+    details[open] .chev { transform: rotate(180deg); }
+    .det-body { padding: 0 0 16px; font-size: 13px; color: var(--muted); line-height: 1.85; }
+    .det-body p + p { margin-top: 8px; }
+    .concept-en { font-size: 13px; font-style: italic; color: var(--earth); letter-spacing: 1px; margin-bottom: 10px; }
+    .concept-ja { font-size: 13px; font-weight: 500; color: var(--earth2); margin-bottom: 16px; }
+    .concept-body { font-size: 13px; color: var(--muted); line-height: 2.1; white-space: pre-line; }
+    .concept-close { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 14px; font-size: 13px; color: var(--earth2); font-weight: 500; font-style: italic; line-height: 1.8; }
+
+    /* CTA */
+    .cta { background: var(--dark); padding: 56px 40px; text-align: center; }
+    .cta-title { font-size: 22px; font-weight: 500; color: #f0e8d8; margin-bottom: 10px; }
+    .cta-sub { font-size: 14px; color: #9a8a70; line-height: 1.9; margin-bottom: 24px; }
+    .cta-btn { display: inline-block; background: var(--gold); color: var(--dark); font-size: 14px; font-weight: 500; padding: 13px 32px; border-radius: 100px; text-decoration: none; }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-small { font-size: 12px; color: #6a5a40; margin-top: 14px; }
+
+    /* Footer */
+    .footer { background: #111009; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { width: 36px; height: 36px; object-fit: contain; opacity: 0.65; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 11px; color: #6a5a40; text-decoration: none; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 480px) {
+      .hero, .cta { padding: 48px 24px 44px; }
+      .section { padding: 36px 24px; }
+      .footer { padding: 20px 24px; flex-direction: column; gap: 16px; text-align: center; }
+      .cards, .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="lp">
+
+  <div class="hero">
+    <img class="hero-logo" src="miles_logo.png" alt="MILES ロゴ" onerror="this.style.display='none'"/>
+    <p class="hero-eyebrow">RUNNING COMMUNITY</p>
+    <p class="hero-en">"Every mile starts with a step."</p>
+    <h1 class="hero-ja">「物語の始まりは、最初の一歩から」</h1>
+    <p class="hero-desc">どんなに遠い目的地も、スタートは最初の一歩から。<br>MILESは、速さより「踏み出すこと」を大切にする<br>ランニングコミュニティです。</p>
+  </div>
+
+  <div class="section s-white">
+    <p class="label">ABOUT</p>
+    <h2 class="s-title">MILESってどんなところ？</h2>
+    <p class="body-text">タイムや距離よりも、「走りながら話せる」「景色を楽しめる」ペースを大切にしています。ランの後はコーヒーを飲みながら自己紹介。走ること×対話で、クリエイティブな繋がりが生まれます。</p>
+    <div class="tag-row">
+      <span class="tag">初心者歓迎</span><span class="tag">おしゃべりペース</span>
+      <span class="tag">朝ラン</span><span class="tag">ポストランコーヒー</span>
+      <span class="tag">自分の物語を語る時間</span>
+    </div>
+    <details>
+      <summary>ブランドコンセプト <i class="ti ti-chevron-down chev"></i></summary>
+      <div class="det-body">
+        <p class="concept-en">"Every mile starts with a step."</p>
+        <p class="concept-ja">「物語の始まりは、最初の一歩から」</p>
+        <p class="concept-body">どんなに遠いゴールも、
+どんなに壮大なクリエイティブも、
+そのすべては「最初の一歩」という、
+もっとも小さな、
+しかしもっとも勇敢な決断から始まります。
+
+MILESは、ランニングを単なる運動ではなく、
+心と体を整え、内なるインスピレーションを形にするための
+「動く瞑想」であると定義します。
+
+一歩踏み出した瞬間、
+停滞していた思考はリズムを取り戻し、呼吸は整い、
+新しいアイディアが溢れ出す。
+その一歩一歩の積み重ねが、
+あなたという唯一無二の物語を紡いでいきます。</p>
+        <div class="concept-close">私たちは、速さや距離を競うのではなく、<br>「最初の一歩を踏み出し、<br>自分のリズムで物語を描き続けること」を称えます。</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="section s-sand">
+    <p class="label">VALUES</p>
+    <h2 class="s-title">大切にしていること</h2>
+    <div class="cards">
+      <div class="card"><div class="card-icon"><i class="ti ti-shoe"></i></div><p class="card-title">速さより、踏み出すこと</p><p class="card-body">タイムは関係なし。走り始めた、それだけで十分です。</p></div>
+      <div class="card"><div class="card-icon"><i class="ti ti-message-circle"></i></div><p class="card-title">対話と繋がり</p><p class="card-body">ランの後はコーヒーを囲んで自己紹介と「今年の一歩」を宣言。</p></div>
+      <div class="card"><div class="card-icon"><i class="ti ti-leaf"></i></div><p class="card-title">自然と朝の空気</p><p class="card-body">静かな公園と朝の光の中で、自分をリセットする時間。</p></div>
+      <div class="card"><div class="card-icon"><i class="ti ti-users"></i></div><p class="card-title">誰もが歓迎される場</p><p class="card-body">安心・安全なコミュニティとして、行動規範を定めています。</p></div>
+    </div>
+  </div>
+
+  <div class="section s-white">
+    <p class="label">EVENTS</p>
+    <h2 class="s-title">開催予定イベント</h2>
+    <div class="admin-toggle">
+      <button onclick="toggleAdmin()"><i class="ti ti-settings" style="font-size:12px;vertical-align:-1px;margin-right:4px"></i>イベント管理</button>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+      <p class="admin-title">NEW EVENT</p>
+      <div class="form-row">
+        <div class="form-group"><label>タイトル</label><input type="text" id="f-title" placeholder="The Second Mile & Coffee"/></div>
+        <div class="form-group"><label>日付</label><input type="date" id="f-date"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>時間</label><input type="text" id="f-time" placeholder="6:30〜8:00"/></div>
+        <div class="form-group"><label>タグ</label><select id="f-tag"><option>朝ラン</option><option>ゆるラン</option><option>コーヒーラン</option><option>特別イベント</option></select></div>
+      </div>
+      <div class="form-row full"><div class="form-group"><label>場所</label><input type="text" id="f-loc" placeholder="芝生広場（舞鶴城の南側）"/></div></div>
+      <div class="form-row full"><div class="form-group"><label>説明（任意）</label><textarea id="f-desc" placeholder="イベントの詳細を入力..."></textarea></div></div>
+      <button class="btn-add" onclick="addEvent()"><i class="ti ti-plus" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>イベントを追加</button>
+      <div class="admin-list" id="adminList"></div>
+    </div>
+    <div class="event-list" id="eventList"></div>
+  </div>
+
+  <div class="section s-sand">
+    <p class="label">COMMUNITY</p>
+    <h2 class="s-title">安心して参加できる場のために</h2>
+    <p class="body-text">誰もが最初の一歩を踏み出せる、安心・安全な場であることがMILESの最優先事項です。</p>
+    <details>
+      <summary>コミュニティ行動規範について <i class="ti ti-chevron-down chev"></i></summary>
+      <div class="det-body">
+        <p>MILESはコミュニティ行動規範を定めています。</p>
+        <p>セクシャルハラスメント・モラルハラスメントその他の禁止行為が確認された場合は、運営者の判断により即時退場・以降のすべての活動への参加禁止（出禁）措置を取ります。</p>
+        <p>被害者の安全確保を最優先とするため、事実確認の完了を待たずに暫定的な措置を行うことがあります。</p>
+      </div>
+    </details>
+    <details>
+      <summary>参加にあたってのお願い <i class="ti ti-chevron-down chev"></i></summary>
+      <div class="det-body">
+        <p>MILESのイベント・活動・SNSに参加することで、コミュニティ行動規範に同意したものとみなします。</p>
+        <p>不快な言動を受けた・目撃した場合は、Instagram DM またはLINEグループ内で運営者へ直接ご連絡ください。報告者のプライバシーは最大限に保護します。</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="cta">
+    <p class="cta-title">あなたの最初の一歩を、<br>ここから始めよう。</p>
+    <p class="cta-sub">参加はInstagramまたはLINEグループから。<br>まずは気軽にDMください。</p>
+    <a href="https://instagram.com/" class="cta-btn" target="_blank" rel="noopener">Instagram でフォローする</a>
+    <p class="cta-small">参加費無料 · 初心者歓迎 · 甲府エリア</p>
+  </div>
+
+  <div class="footer">
+    <img class="footer-logo" src="miles_logo.png" alt="MILES" onerror="this.style.display='none'"/>
+    <div class="footer-links">
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="conduct.html">コミュニティ規範</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+
+</div>
+<script>
+  const DOW=['日','月','火','水','木','金','土'];
+  const MONTHS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const KEY='miles_events_v1';
+  const INIT=[{id:'evt-0',title:'The First Mile & Coffee',date:'2025-06-19',time:'6:30〜8:00',loc:'芝生広場（舞鶴城の南側）→ カフェ 寺崎',desc:'自己紹介＋「今年踏み出したい一歩」を宣言。',tag:'朝ラン'}];
+  const load=()=>{try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):INIT;}catch(e){return INIT;}};
+  const save=e=>{try{localStorage.setItem(KEY,JSON.stringify(e));}catch(e){}};
+  const pd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
+  function render(){
+    const evts=load().sort((a,b)=>pd(a.date)-pd(b.date));
+    const el=document.getElementById('eventList'),al=document.getElementById('adminList');
+    el.innerHTML=evts.length?evts.map(ev=>{const d=pd(ev.date);return`<div class="event-card"><div class="event-date-block"><div class="event-month">${MONTHS[d.getMonth()]}</div><div class="event-day">${d.getDate()}</div><div class="event-dow">${DOW[d.getDay()]}</div></div><div class="event-divider"></div><div class="event-info"><p class="event-title">${ev.title}</p><p class="event-meta">${ev.time}${ev.desc?' · '+ev.desc:''}</p>${ev.loc?`<p class="event-loc"><i class="ti ti-map-pin" style="font-size:11px;vertical-align:-1px"></i> ${ev.loc}</p>`:''}<span class="event-badge">${ev.tag}</span></div></div>`;}).join(''):'<p class="event-empty">現在予定されているイベントはありません。</p>';
+    al.innerHTML=evts.length?`<p class="admin-list-title">登録済みイベント</p>`+evts.map(ev=>`<div class="admin-item"><span>${ev.date}　${ev.title}</span><button class="btn-del" onclick="del('${ev.id}')">削除</button></div>`).join(''):'';
+  }
+  function toggleAdmin(){document.getElementById('adminPanel').classList.toggle('open');}
+  function addEvent(){
+    const t=document.getElementById('f-title').value.trim(),d=document.getElementById('f-date').value;
+    if(!t||!d){alert('タイトルと日付は必須です');return;}
+    const evts=load();
+    evts.push({id:'evt-'+Date.now(),title:t,date:d,time:document.getElementById('f-time').value.trim(),loc:document.getElementById('f-loc').value.trim(),desc:document.getElementById('f-desc').value.trim(),tag:document.getElementById('f-tag').value});
+    save(evts);render();
+    ['f-title','f-date','f-time','f-loc','f-desc'].forEach(i=>document.getElementById(i).value='');
+  }
+  function del(id){if(!confirm('このイベントを削除しますか？'))return;save(load().filter(e=>e.id!==id));render();}
+  render();
+</script>
+</body>
+</html>
